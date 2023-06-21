@@ -19,19 +19,27 @@ defmodule HavvkWeb.DashboardLive do
           <th>qa</th>
           <th>prod</th>
         </tr>
-        <%= for {app, envVersions} <- @versions do %>
+
+
+        <%= for {appKey, appDetails} <- @versions do %>
           <tr>
-           <td>app: <%= app %></td>
-           <td style="background-color: {get_colour(envVersions["dev"])};"><%= envVersions["dev"] %></td>
-           <td><%= envVersions["qa"] %></td>
-           <td><%= envVersions["prod"] %></td>
+            <td>app: <%= appKey %></td>
 
-           <div class="<%= random_color_class() %>">
-  <p>This element has a random background color.</p>
-</div>
+            <%!-- works! amazing --%>
+            <td class={@versions["app1"]["dev"]}> <%= appDetails["dev"] %></td>
 
+            <%!-- also works, great --%>
+            <td class={@versions[appKey]["dev"]}> using vars</td>
+
+            <%!-- also works! --%>
+            <td class={appDetails["dev"]}> using no @</td>
+
+            <td class="bg-amber-500"><%= appDetails["qa"] %></td>
+
+            <td><%= appDetails["prod"] %></td>
+            <%!--  --%>
           </tr>
-        <% end %>
+       <% end %>
       </table>
     </div>
     """
@@ -45,43 +53,11 @@ defmodule HavvkWeb.DashboardLive do
         versions: DashboardData.get_versions_mocked()
       )
 
+
+    IO.inspect(socket)
     IO.puts("checking socket assigns, added versions")
-    IO.inspect(socket.assigns)
 
     {:ok, socket}
-  end
-
-  defp get_style(version) do
-    colour = get_colour(version)
-
-    "background-color: #{colour}"
-  end
-
-# 150 green
-# 151 red
-# 152 blue
-  defp get_colour(version) do
-    colours =
-      Enum.shuffle([
-        # purple
-        "#9C9BC4",
-        # peach
-        "#C49C9B",
-        "#9CC49B",
-        # green
-        "#9BC49C",
-        # peach
-        "#C49B9C"
-      ])
-
-    index = rem(version, length(colours))
-    colours[index]
-  end
-
-  def random_color_class() do
-    colors = ["bg-red-500", "bg-blue-500", "bg-green-500", "bg-yellow-500"]
-    random_index = :rand.uniform(length(colors))
-    List.at(colors, random_index)
   end
 
 end
