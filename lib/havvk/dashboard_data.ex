@@ -1,17 +1,17 @@
 defmodule Havvk.DashboardData do
-  def get_versions_random() do
-    applications = ["app1", "app2"]
-    environments = ["dev", "qa", "prod"]
+  def get_versions_mocked() do
+    data = %{
+      "app1" => %{
+        "dev" => 2,
+        "qa" => 2,
+        "prod" => 2
+      },
+      "app2" => %{
+        "dev" => 2,
+        "qa" => 1,
+        "prod" => 1
+      }
+    }
 
-    data =
-      Enum.reduce(applications, [], fn app, acc ->
-        Enum.reduce(environments, acc, fn env, acc ->
-          random_number = :rand.uniform(2)
-          [{app, env, random_number} | acc]
-        end)
-      end)
-
-    IO.inspect(data)
-    data
   end
 end

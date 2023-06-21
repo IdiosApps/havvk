@@ -19,23 +19,30 @@ defmodule HavvkWeb.DashboardLive do
           <th>qa</th>
           <th>prod</th>
         </tr>
-        <%= for {app, env, version} <- @versions do %>
-           <p>app: <%= app %>, env: <%= env %>, v: <%= version %></p>
+        <%= for {app, envVersions} <- @versions do %>
+          <tr>
+           <td>app: <%= app %></td>
+           <td>v. dev: <%= envVersions["dev"] %></td>
+           <td>v. qa: <%= envVersions["qa"] %></td>
+           <td>v. prod: <%= envVersions["prod"] %></td>
+          </tr>
         <% end %>
-
       </table>
-
     </div>
     """
   end
 
   def mount(_params, _session, socket) do
-    {:ok,
-     assign(
-       socket,
-       current_time: DateTime.utc_now(),
-       versions: DashboardData.get_versions_random()
-     )}
+
+    socket = assign(
+      socket,
+      current_time: DateTime.utc_now(),
+      versions: DashboardData.get_versions_mocked()
+    )
+
+    IO.puts("checking socket assigns, added versions")
+    IO.inspect(socket.assigns)
+
+    {:ok, socket}
   end
 end
-1
