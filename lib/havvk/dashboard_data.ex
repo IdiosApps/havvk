@@ -1,6 +1,6 @@
 defmodule Havvk.DashboardData do
   def get_versions_mocked() do
-    data = %{
+    %{
       "app1" => %{
         "dev" => 2,
         "qa" => 2,
@@ -12,6 +12,5 @@ defmodule Havvk.DashboardData do
         "prod" => 1
       }
     }
-
   end
 end
