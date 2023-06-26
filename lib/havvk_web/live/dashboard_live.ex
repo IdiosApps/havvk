@@ -25,11 +25,17 @@ defmodule HavvkWeb.DashboardLive do
           <tr>
             <td><%= app %></td>
             <%= for {env, regions} <- Map.to_list(envs) |> sortEnvs do %>
+              <td>
+              <table class="table-auto border-collapse border border-blue-500 w-full">
               <%= for {region, details} <- Map.to_list(regions) |> sortRegions do %>
+              <tr>
                 <td class={details["color"]}>
                   v<%= details["version"] %>, colour: <%= details["color"] %> Region: <%= region %>  env: <%= env %>
                 </td>
+              </tr>
               <% end %>
+              </table>
+              </td>
             <% end %>
           </tr>
         <% end %>
