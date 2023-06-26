@@ -9,7 +9,7 @@ defmodule HavvkWeb.DashboardLive do
       <h1>Hello, LiveView!</h1>
 
       <p>Current time: <%= @current_time %></p>
-       <%!-- <p>Versions: <%= @versions %></p> --%>
+      <%!-- <p>Versions: <%= @versions %></p> --%>
       <table>
         <tr>
           <th>Application</th>
@@ -21,51 +21,51 @@ defmodule HavvkWeb.DashboardLive do
           <th>prod</th>
         </tr>
 
-        <%= for {appKey, appDetails} <- @versions do %>
-          <tr>
-            <td>app: <%= appKey %></td>
-             <%!-- works! amazing --%>
-            <td class={@versions["app1"]["dev"]}><%= appDetails["dev"] %></td>
-             <%!-- also works, great --%>
-            <td class={@versions[appKey]["dev"]}>using vars</td>
-             <%!-- also works! --%>
-            <td class={appDetails["dev"]}>using no @</td>
-
-            <td class="bg-amber-500"><%= appDetails["qa"] %></td>
-
-            <td><%= appDetails["prod"] %></td>
-             <%!--  --%>
-          </tr>
+        <%= for {app, envs} <- @versions do %>
+          <h2><%= app %></h2>
+          <%= for {env, details} <- Map.to_list(envs) |> sortEnvs do %>
+            <div>
+              <p>Environment: <%= env %></p>
+              <p>Version: <%= details["version"] %></p>
+            </div>
+          <% end %>
         <% end %>
+
+
       </table>
 
-      <table class="table-auto border-collapse border border-green-800 m-4">
-        <%= for _ <- 1..3 do %>  <%!-- 3 rows --%>
-          <tr>
-            <%= for _ <- 1..3 do %>  <%!--  3 cols --%>
-              <td class="border border-green-600 p-2">
-                <table class="table-auto border-collapse border border-blue-500 w-full">
-                 <%= for nested_id <- 1..3 do %>  <%!--  3 rows (1 col) per cell --%>
-                    <tr>
-                        <td class="border border-blue-300 p-1 text-center"><%= nested_id %></td>
-                    </tr>
-                  <% end %>
-                </table>
-              </td>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
     </div>
     """
   end
+
+#   <%= for {appKey, appDetails} <- @versions do %>
+#   <tr>
+#     <td>app: <%= appKey %></td>
+#      <%!-- works! amazing --%>
+#     <td class={@versions["app1"]["dev"]}><%= appDetails["dev"] %></td>
+#      <%!-- also works, great --%>
+#     <td class={@versions[appKey]["dev"]}>using vars</td>
+#      <%!-- also works! --%>
+#     <td class={appDetails["dev"]}>using no @</td>
+
+#     <td class="bg-amber-500"><%= appDetails["qa"] %></td>
+
+#     <td><%= appDetails["prod"] %></td>
+#      <%!--  --%>
+#   </tr>
+# <% end %>
+
+def sortEnvs(list) do
+  order = ["dev", "qa", "prod"]
+  Enum.sort_by(list, fn {env, _} -> Enum.find_index(order, &(&1 == env)) end)
+end
 
   def mount(_params, _session, socket) do
     socket =
       assign(
         socket,
         current_time: DateTime.utc_now(),
-        versions: DashboardData.get_versions_mocked()
+        versions: DashboardData.get_versions_mocked_v2()
       )
 
     IO.inspect(socket)
