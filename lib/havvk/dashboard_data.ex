@@ -18,9 +18,9 @@ defmodule Havvk.DashboardData do
     x = %{
       "app1" => %{
         "dev" => %{
-          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
-          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
-          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
+          "us-east-1" => %{"color" => "bg-teal-300", "version" => 2},
+          "us-east-2" => %{"color" => "bg-teal-300", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-teal-300", "version" => 2}
         },
         "qa" => %{
           "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
@@ -35,19 +35,19 @@ defmodule Havvk.DashboardData do
       },
       "app2" => %{
         "dev" => %{
-          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
-          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
-          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
+          "us-east-1" => %{"color" => "bg-amber-300", "version" => 2},
+          "us-east-2" => %{"color" => "bg-teal-300", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-amber-300", "version" => 2}
         },
         "qa" => %{
-          "us-east-1" => %{"color" => "bg-red-500", "version" => 1},
-          "us-east-2" => %{"color" => "bg-red-500", "version" => 1},
-          "eu-west-1" => %{"color" => "bg-red-500", "version" => 1}
+          "us-east-1" => %{"color" => "bg-pink-300", "version" => 1},
+          "us-east-2" => %{"color" => "bg-pink-300", "version" => 1},
+          "eu-west-1" => %{"color" => "bg-pink-300", "version" => 1}
         },
         "prod" => %{
-          "us-east-1" => %{"color" => "bg-red-500", "version" => 1},
-          "us-east-2" => %{"color" => "bg-red-500", "version" => 1},
-          "eu-west-1" => %{"color" => "bg-red-500", "version" => 1}
+          "us-east-1" => %{"color" => "bg-pink-300", "version" => 1},
+          "us-east-2" => %{"color" => "bg-pink-300", "version" => 1},
+          "eu-west-1" => %{"color" => "bg-pink-300", "version" => 1}
         }
       }
     }

@@ -6,9 +6,15 @@ defmodule HavvkWeb.DashboardLive do
   def render(assigns) do
     ~H"""
     <div>
-      <h1>Hello, LiveView!</h1>
+            <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
+      <div hidden>
+      <td class="bg-amber-300"> hello</td>
+      <td class="bg-purple-300"> world</td>
+      <td class="bg-green-200"> wow</td>
+      <td class="bg-pink-300"> wow</td>
 
-      <p>Current time: <%= @current_time %></p>
+      <td class="bg-teal-300"> universe</td>
+      </div>
       <%!-- <p>Versions: <%= @versions %></p> --%>
       <table>
         <tr>
@@ -26,25 +32,19 @@ defmodule HavvkWeb.DashboardLive do
             <td><%= app %></td>
             <%= for {env, regions} <- Map.to_list(envs) |> sortEnvs do %>
               <td>
-              <table class="table-auto border-collapse border border-blue-500 w-full">
               <%= for {region, details} <- Map.to_list(regions) |> sortRegions do %>
-              <tr>
-                <td class={details["color"]}>
+              <ul>
+                <li class={details["color"]}>
                   v<%= details["version"] %>, colour: <%= details["color"] %> Region: <%= region %>  env: <%= env %>
-                </td>
-              </tr>
+                </li>
+              </ul>
               <% end %>
-              </table>
               </td>
             <% end %>
           </tr>
         <% end %>
       </table>
 
-      <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
-      <td class="bg-amber-300"> hello</td>
-      <td class="bg-purple-300"> world</td>
-      <td class="bg-teal-300"> world</td>
     </div>
     """
   end
@@ -63,7 +63,6 @@ defmodule HavvkWeb.DashboardLive do
     socket =
       assign(
         socket,
-        current_time: DateTime.utc_now(),
         versions: DashboardData.get_versions_mocked_v2()
       )
 
