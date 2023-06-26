@@ -49,7 +49,11 @@ defmodule Havvk.MixProject do
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
       {:jason, "~> 1.2"},
-      {:plug_cowboy, "~> 2.5"}
+      {:plug_cowboy, "~> 2.5"},
+      {:httpoison, "~> 2.0"},
+      {:poison, "~> 4.0"}, # maybe don't need - see jason above
+      {:cowboy, "~> 2.9"},
+      {:plug, "~> 1.12"}
     ]
   end
 

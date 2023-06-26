@@ -17,10 +17,18 @@ defmodule Havvk.Application do
       # Start Finch
       {Finch, name: Havvk.Finch},
       # Start the Endpoint (http/https)
-      HavvkWeb.Endpoint
+      HavvkWeb.Endpoint,
       # Start a worker by calling: Havvk.Worker.start_link(arg)
       # {Havvk.Worker, arg}
+      {Plug.Cowboy, scheme: :http, plug: Havvk.MockServer, options: [port: 8081]}
     ]
+
+    # children = case args do
+    #   [env: :prod] -> base
+    #   [env: :test] -> base ++ [{Plug.Cowboy, scheme: :http, plug: Havvk.MockServer, options: [port: 8081]}]
+    #   [env: :dev] -> base ++ [{Plug.Cowboy, scheme: :http, plug: Havvk.MockServer, options: [port: 8081]}]
+    #   [] -> base
+    # end
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
