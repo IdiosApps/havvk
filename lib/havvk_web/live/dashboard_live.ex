@@ -22,38 +22,26 @@ defmodule HavvkWeb.DashboardLive do
         </tr>
 
         <%= for {app, envs} <- @versions do %>
-          <h2><%= app %></h2>
+          <tr>
+          <td><%= app %></td>
           <%= for {env, details} <- Map.to_list(envs) |> sortEnvs do %>
-            <div>
-              <p>Environment: <%= env %></p>
-              <p>Version: <%= details["version"] %></p>
-            </div>
+
+              <td class={details["color"]}> v<%= details["version"] %>, colour: <%= details["color"] %> </td>
+
           <% end %>
+        </tr>
         <% end %>
 
 
       </table>
 
+      <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
+      <td class="bg-amber-300"> hello</td>
+      <td class="bg-purple-300"> world</td>
+      <td class="bg-teal-300"> world</td> --%>
     </div>
     """
   end
-
-#   <%= for {appKey, appDetails} <- @versions do %>
-#   <tr>
-#     <td>app: <%= appKey %></td>
-#      <%!-- works! amazing --%>
-#     <td class={@versions["app1"]["dev"]}><%= appDetails["dev"] %></td>
-#      <%!-- also works, great --%>
-#     <td class={@versions[appKey]["dev"]}>using vars</td>
-#      <%!-- also works! --%>
-#     <td class={appDetails["dev"]}>using no @</td>
-
-#     <td class="bg-amber-500"><%= appDetails["qa"] %></td>
-
-#     <td><%= appDetails["prod"] %></td>
-#      <%!--  --%>
-#   </tr>
-# <% end %>
 
 def sortEnvs(list) do
   order = ["dev", "qa", "prod"]

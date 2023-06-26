@@ -18,24 +18,30 @@ defmodule Havvk.DashboardData do
     x = %{
       "app1" => %{
         "dev" => %{
-          "version" => 2
+          "version" => 2,
+          "color" => "bg-teal-300"
         },
         "qa" => %{
-          "version" => 2
+          "version" => 2,
+          "color" => "bg-teal-300"
         },
         "prod" => %{
-          "version" => 2
+          "version" => 2,
+          "color" => "bg-teal-300"
         }
       },
       "app2" => %{
         "dev" => %{
-          "version" => 2
+          "version" => 2,
+          "color" => "bg-teal-300"
         },
         "qa" => %{
-          "version" => 1
+          "version" => 1,
+          "color" => "bg-amber-300"
         },
         "prod" => %{
-          "version" => 1
+          "version" => 1,
+          "color" => "bg-amber-300"
         }
       }
     }
