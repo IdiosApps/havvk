@@ -18,30 +18,36 @@ defmodule Havvk.DashboardData do
     x = %{
       "app1" => %{
         "dev" => %{
-          "version" => 2,
-          "color" => "bg-teal-300"
+          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
+          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
         },
         "qa" => %{
-          "version" => 2,
-          "color" => "bg-teal-300"
+          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
+          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
         },
         "prod" => %{
-          "version" => 2,
-          "color" => "bg-teal-300"
+          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
+          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
         }
       },
       "app2" => %{
         "dev" => %{
-          "version" => 2,
-          "color" => "bg-teal-300"
+          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
+          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
         },
         "qa" => %{
-          "version" => 1,
-          "color" => "bg-amber-300"
+          "us-east-1" => %{"color" => "bg-red-500", "version" => 1},
+          "us-east-2" => %{"color" => "bg-red-500", "version" => 1},
+          "eu-west-1" => %{"color" => "bg-red-500", "version" => 1}
         },
         "prod" => %{
-          "version" => 1,
-          "color" => "bg-amber-300"
+          "us-east-1" => %{"color" => "bg-red-500", "version" => 1},
+          "us-east-2" => %{"color" => "bg-red-500", "version" => 1},
+          "eu-west-1" => %{"color" => "bg-red-500", "version" => 1}
         }
       }
     }
@@ -50,8 +56,9 @@ defmodule Havvk.DashboardData do
     IO.inspect(x)
     IO.inspect(x["app1"])
     IO.inspect(x["app1"]["dev"])
-    # IO.inspect(x["app1"]["dev"]["color"])
-    IO.inspect(x["app1"]["dev"]["version"])
+    IO.inspect(x["app1"]["dev"]["us-east-1"])
+    IO.inspect(x["app1"]["dev"]["us-east-1"]["color"])
+    IO.inspect(x["app1"]["dev"]["us-east-1"]["version"])
 
     x
   end

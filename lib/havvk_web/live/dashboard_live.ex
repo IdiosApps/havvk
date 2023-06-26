@@ -23,30 +23,35 @@ defmodule HavvkWeb.DashboardLive do
 
         <%= for {app, envs} <- @versions do %>
           <tr>
-          <td><%= app %></td>
-          <%= for {env, details} <- Map.to_list(envs) |> sortEnvs do %>
-
-              <td class={details["color"]}> v<%= details["version"] %>, colour: <%= details["color"] %> </td>
-
-          <% end %>
-        </tr>
+            <td><%= app %></td>
+            <%= for {env, regions} <- Map.to_list(envs) |> sortEnvs do %>
+              <%= for {region, details} <- Map.to_list(regions) |> sortRegions do %>
+                <td class={details["color"]}>
+                  v<%= details["version"] %>, colour: <%= details["color"] %> Region: <%= region %>  env: <%= env %>
+                </td>
+              <% end %>
+            <% end %>
+          </tr>
         <% end %>
-
-
       </table>
 
       <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
       <td class="bg-amber-300"> hello</td>
       <td class="bg-purple-300"> world</td>
-      <td class="bg-teal-300"> world</td> --%>
+      <td class="bg-teal-300"> world</td>
     </div>
     """
   end
 
-def sortEnvs(list) do
-  order = ["dev", "qa", "prod"]
-  Enum.sort_by(list, fn {env, _} -> Enum.find_index(order, &(&1 == env)) end)
-end
+  def sortEnvs(list) do
+    order = ["dev", "qa", "prod"]
+    Enum.sort_by(list, fn {env, _} -> Enum.find_index(order, &(&1 == env)) end)
+  end
+
+  def sortRegions(list) do
+    order = ["us-east-1", "us-east-2", "eu-west-1"]
+    Enum.sort_by(list, fn {env, _} -> Enum.find_index(order, &(&1 == env)) end)
+  end
 
   def mount(_params, _session, socket) do
     socket =
