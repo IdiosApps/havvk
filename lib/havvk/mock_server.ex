@@ -9,10 +9,16 @@ defmodule Havvk.MockServer do
   plug :dispatch
 
   get "/version" do
+
+    version = case Application.get_env(:havvk, :env) do
+      :test -> "v123"
+      :dev -> "v" <> Integer.to_string(Enum.random(1 .. 5))
+    end
+
     # case conn.params do
       # %{"name" =>"success-repo"} ->
         # Could add fields like env, region, buildTimestamp, etc.
-        success(conn, %{:version => "v123", :name => "some-app"})
+        success(conn, %{:version => version, :name => "some-app"})
       # %{"name" =>"failure-repo"} ->
       #   failure(conn)
     # end

@@ -1,4 +1,6 @@
 defmodule Havvk.DashboardData do
+  alias Havvk.HttpClient
+
   def get_versions_mocked() do
     %{
       "app1" => %{
@@ -35,30 +37,19 @@ defmodule Havvk.DashboardData do
       }
     }
 
-    a = %{}
-    b = Map.put_new(a, "myKey", "myValue")
-    IO.inspect(b)
+
+    # IO.puts("v2 mocked versions")
+    # IO.inspect(x)
+    # IO.inspect(x["app1"])
+    # IO.inspect(x["app1"]["dev"])
+    # IO.inspect(x["app1"]["dev"]["us-east-1"])
+    # IO.inspect(x["app1"]["dev"]["us-east-1"]["color"])
+    # IO.inspect(x["app1"]["dev"]["us-east-1"]["version"])
 
 
-
-    for {app, envs} <- x do
-      for {env, regions} <- Map.to_list(envs) do
-        for {region, details} <- Map.to_list(regions) do
-          IO.puts("setting color")
-          details = Map.put_new(details, "color", "bg-red-100")
-          IO.inspect(details)
-        end
-      end
-    end
-
-    IO.puts("v2 mocked versions")
-    IO.inspect(x)
-    IO.inspect(x["app1"])
-    IO.inspect(x["app1"]["dev"])
-    IO.inspect(x["app1"]["dev"]["us-east-1"])
-    IO.inspect(x["app1"]["dev"]["us-east-1"]["color"])
-    IO.inspect(x["app1"]["dev"]["us-east-1"]["version"])
-
+    IO.puts("making call with get_version")
+    IO.inspect(HttpClient.get_version())
     x
+
   end
 end

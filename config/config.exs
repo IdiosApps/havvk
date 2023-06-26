@@ -10,6 +10,10 @@ import Config
 config :havvk,
   ecto_repos: [Havvk.Repo]
 
+# So we can get the environment
+config :havvk, env: Mix.env()
+
+
 # Configures the endpoint
 config :havvk, HavvkWeb.Endpoint,
   url: [host: "localhost"],
