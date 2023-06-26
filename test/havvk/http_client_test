@@ -1,0 +1,9 @@
+defmodule Havvk.HttpClient.Test do
+  use ExUnit.Case, async: false
+  alias Havvk.HttpClient
+
+  test "get_version success when success" do
+    response = HttpClient.get_version()
+    assert "v123" == response
+  end
+end

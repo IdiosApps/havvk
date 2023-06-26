@@ -16,3 +16,14 @@ Ready to run in production? Please [check our deployment guides](https://hexdocs
   * Docs: https://hexdocs.pm/phoenix
   * Forum: https://elixirforum.com/c/phoenix-forum
   * Source: https://github.com/phoenixframework/phoenix
+
+# Testing
+
+http://localhost:8081/
+Cowboy lightweight server serves a plug. Currently returns "Hello, world!", in all envs.
+Aiming for test, dev only
+
+It starts with the rest of the app when `mix phx.server` is called.
+https://medium.com/flatiron-labs/rolling-your-own-mock-server-for-testing-in-elixir-2cdb5ccdd1a0 was a very helpful starting point.
+
+`mix test test\havvk\http_client_test`
