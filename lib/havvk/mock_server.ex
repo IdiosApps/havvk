@@ -24,7 +24,7 @@ defmodule Havvk.MockServer do
     # end
   end
 
-  defp success(conn, body \\ "") do
+  defp success(conn, body) do
     conn
     |> Plug.Conn.send_resp(200, Poison.encode!(body))
   end

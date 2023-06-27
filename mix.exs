@@ -51,9 +51,10 @@ defmodule Havvk.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:httpoison, "~> 2.0"},
-      {:poison, "~> 4.0"}, # maybe don't need - see jason above
+      # maybe don't need - see jason above
+      {:poison, "~> 4.0"},
       {:cowboy, "~> 2.9"},
-      {:plug, "~> 1.12"}
+      {:plug, "~> 1.12"},
     ]
   end
 

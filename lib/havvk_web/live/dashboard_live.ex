@@ -6,14 +6,14 @@ defmodule HavvkWeb.DashboardLive do
   def render(assigns) do
     ~H"""
     <div>
-            <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
+      <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
       <div hidden>
-      <td class="bg-amber-300"> hello</td>
-      <td class="bg-purple-300"> world</td>
-      <td class="bg-green-200"> wow</td>
-      <td class="bg-pink-300"> wow</td>
+        <td class="bg-amber-300">hello</td>
+        <td class="bg-purple-300">world</td>
+        <td class="bg-green-200">wow</td>
+        <td class="bg-pink-300">wow</td>
 
-      <td class="bg-teal-300"> universe</td>
+        <td class="bg-teal-300">universe</td>
       </div>
       <%!-- <p>Versions: <%= @versions %></p> --%>
       <table>
@@ -32,19 +32,18 @@ defmodule HavvkWeb.DashboardLive do
             <td><%= app %></td>
             <%= for {env, regions} <- Map.to_list(envs) |> sortEnvs do %>
               <td>
-              <%= for {region, details} <- Map.to_list(regions) |> sortRegions do %>
-              <ul>
-                <li class={details["color"]}>
-                  v<%= details["version"] %>, colour: <%= details["color"] %> Region: <%= region %>  env: <%= env %>
-                </li>
-              </ul>
-              <% end %>
+                <%= for {region, details} <- Map.to_list(regions) |> sortRegions do %>
+                  <ul>
+                    <li class={details["color"]}>
+                      <%= details["version"] %>, colour: <%= details["color"] %> Region: <%= region %> env: <%= env %>
+                    </li>
+                  </ul>
+                <% end %>
               </td>
             <% end %>
           </tr>
         <% end %>
       </table>
-
     </div>
     """
   end
@@ -63,7 +62,7 @@ defmodule HavvkWeb.DashboardLive do
     socket =
       assign(
         socket,
-        versions: DashboardData.get_versions_mocked_v2()
+        versions: DashboardData.get_versions_by_http()
       )
 
     IO.inspect(socket)

@@ -17,7 +17,7 @@ defmodule Havvk.DashboardData do
   end
 
   def get_versions_mocked_v2() do
-    x = %{
+    %{
       "app1" => %{
         "dev" => %{
           "us-east-1" => %{"version" => 1},
@@ -36,20 +36,41 @@ defmodule Havvk.DashboardData do
         }
       }
     }
+  end
 
+  def get_versions_by_http() do
+    apps = ["app1", "app2"]
+    envs = ["dev", "qa", "prod"]
+    regions = ["us-east-1", "us-east-2", "eu-west-1"]
 
-    # IO.puts("v2 mocked versions")
-    # IO.inspect(x)
-    # IO.inspect(x["app1"])
-    # IO.inspect(x["app1"]["dev"])
-    # IO.inspect(x["app1"]["dev"]["us-east-1"])
-    # IO.inspect(x["app1"]["dev"]["us-east-1"]["color"])
-    # IO.inspect(x["app1"]["dev"]["us-east-1"]["version"])
+    result =
+      for app <- apps, into: %{} do
+        {
+          app,
+          for env <- envs, into: %{} do
+            {
+              env,
+              for region <- regions, into: %{} do
+                version = HttpClient.get_version()
 
+                color =
+                  case version do
+                    "v1" -> "bg-blue-300"
+                    "v2" -> "bg-teal-300"
+                    "v3" -> "bg-red-300"
+                    "v4" -> "bg-yellow-300"
+                    "v5" -> "bg-orange-300"
+                    _ -> "bg-peach-300"
+                  end
 
-    IO.puts("making call with get_version")
-    IO.inspect(HttpClient.get_version())
-    x
+                {region, %{"version" => version, "color" => color}}
+              end
+            }
+          end
+        }
+      end
 
+    IO.inspect(result)
+    result
   end
 end
