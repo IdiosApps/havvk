@@ -51,7 +51,15 @@ defmodule Havvk.DashboardData do
             {
               env,
               for region <- regions, into: %{} do
-                version = HttpClient.get_version()
+                version =
+                  case Application.get_env(:havvk, :env) do
+                    env when env in [:test, :dev] ->
+                      HttpClient.get_version_local()
+
+                    _ ->
+                      ("https://" <> app <> "-" <> env <> "-" <> region <> ".my-org.net")
+                      |> HttpClient.get_version_remote()
+                  end
 
                 color =
                   case version do
