@@ -54,7 +54,9 @@ defmodule Havvk.DashboardData do
                 version =
                   case Application.get_env(:havvk, :env) do
                     env when env in [:test, :dev] ->
-                      HttpClient.get_version_local()
+                      ("https://" <>
+                         app <> "-" <> Atom.to_string(env) <> "-" <> region <> ".my-org.net")
+                      |> HttpClient.get_version_remote()
 
                     _ ->
                       ("https://" <> app <> "-" <> env <> "-" <> region <> ".my-org.net")

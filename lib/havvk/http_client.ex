@@ -2,7 +2,11 @@ defmodule Havvk.HttpClient do
   @local_base_url "localhost:8081"
 
   def get_version_remote(base_url) do
-    HTTPoison.get(base_url <> "/version")
+    IO.puts("getting remote version")
+    url = base_url <> "/version"
+    options = [timeout: 200]
+
+    HTTPoison.get(url, [], options)
     |> handle_response
   end
 
@@ -18,8 +22,11 @@ defmodule Havvk.HttpClient do
         |> Jason.decode!()
         |> Map.get("version")
 
-        # {:ok, %{body: body, status_code: 422}} ->
-        #   %{error_message: message}
+      {:error, %HTTPoison.Error{reason: :econnrefused, id: nil}} ->
+        "unavailable"
+
+      {:error, %HTTPoison.Error{reason: :timeout, id: nil}} ->
+        "timed out"
     end
   end
 end
