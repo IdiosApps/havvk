@@ -10,8 +10,6 @@ defmodule Havvk.Application do
     children = [
       # Start the Telemetry supervisor
       HavvkWeb.Telemetry,
-      # Start the Ecto repository
-      Havvk.Repo,
       # Start the PubSub system
       {Phoenix.PubSub, name: Havvk.PubSub},
       # Start Finch

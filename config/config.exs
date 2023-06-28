@@ -7,9 +7,6 @@
 # General application configuration
 import Config
 
-config :havvk,
-  ecto_repos: [Havvk.Repo]
-
 # So we can get the environment
 config :havvk, env: Mix.env()
 
