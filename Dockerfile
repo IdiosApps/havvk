@@ -72,7 +72,7 @@ RUN mix release
 FROM ${RUNNER_IMAGE}
 
 # Set the environment variable with the build argument value
-ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
+ENV SECRET_KEY_BASE="JXPfv93OLbb0OHjHEn+ZuR+ZsL0bSPVnkdTgAl2qbDm0YnalCHho+jqyHO3oPXiL"
 ENV PHX_HOST="localhost"
 
 

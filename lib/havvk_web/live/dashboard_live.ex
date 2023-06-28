@@ -32,9 +32,9 @@ defmodule HavvkWeb.DashboardLive do
               <%= for {_env, regions} <- Map.to_list(envs) |> sortEnvs do %>
                 <td class="border px-4 py-2">
                   <%= for {_region, details} <- Map.to_list(regions) |> sortRegions do %>
-                      <p class={"px-4 py-2 " <> details["color"]}>
-                        <%= details["version"] %>
-                      </p>
+                    <p class={"px-4 py-2 " <> details["color"]}>
+                      <%= details["version"] %>
+                    </p>
                   <% end %>
                 </td>
               <% end %>
@@ -61,8 +61,9 @@ defmodule HavvkWeb.DashboardLive do
     socket =
       assign(
         socket,
-        versions: DashboardData.get_versions_by_http()
+        versions: DashboardData.get_versions_mocked_v2()
       )
+
     {:ok, socket}
   end
 end
