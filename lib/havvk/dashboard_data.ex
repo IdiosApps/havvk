@@ -20,19 +20,19 @@ defmodule Havvk.DashboardData do
     %{
       "app1" => %{
         "dev" => %{
-          "us-east-1" => %{"version" => 1},
-          "us-east-2" => %{"color" => "bg-teal-300", "version" => 2},
-          "eu-west-1" => %{"color" => "bg-teal-300", "version" => 3}
+          "us-east-1" => %{"color" => "bg-emerald-300", "version" => "v2023.12.31-3"},
+          "us-east-2" => %{"color" => "bg-emerald-300", "version" => 3},
+          "eu-west-1" => %{"color" => "bg-emerald-300", "version" => 3}
         },
         "qa" => %{
-          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
-          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
-          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
+          "us-east-1" => %{"color" => "bg-emerald-300", "version" => 3},
+          "us-east-2" => %{"color" => "bg-amber-300", "version" => 2},
+          "eu-west-1" => %{"color" => "bg-amber-300", "version" => 2}
         },
         "prod" => %{
-          "us-east-1" => %{"color" => "bg-blue-500", "version" => 2},
-          "us-east-2" => %{"color" => "bg-blue-500", "version" => 2},
-          "eu-west-1" => %{"color" => "bg-blue-500", "version" => 2}
+          "us-east-1" => %{"color" => "bg-cyan-300", "version" => 1},
+          "us-east-2" => %{"color" => "bg-cyan-300", "version" => 1},
+          "eu-west-1" => %{"color" => "bg-cyan-300", "version" => 1}
         }
       }
     }
