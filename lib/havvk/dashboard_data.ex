@@ -38,6 +38,7 @@ defmodule Havvk.DashboardData do
     }
   end
 
+  @spec get_versions_by_http :: map
   def get_versions_by_http() do
     apps = ["app1", "app2"]
     envs = ["dev", "qa", "prod"]
@@ -54,9 +55,7 @@ defmodule Havvk.DashboardData do
                 version =
                   case Application.get_env(:havvk, :env) do
                     env when env in [:test, :dev] ->
-                      ("https://" <>
-                         app <> "-" <> Atom.to_string(env) <> "-" <> region <> ".my-org.net")
-                      |> HttpClient.get_version_remote()
+                      HttpClient.get_version_local()
 
                     _ ->
                       ("https://" <> app <> "-" <> env <> "-" <> region <> ".my-org.net")
@@ -65,12 +64,12 @@ defmodule Havvk.DashboardData do
 
                 color =
                   case version do
-                    "v1" -> "bg-blue-300"
-                    "v2" -> "bg-teal-300"
-                    "v3" -> "bg-red-300"
-                    "v4" -> "bg-yellow-300"
-                    "v5" -> "bg-orange-300"
-                    _ -> "bg-peach-300"
+                    "v1" -> "bg-rose-300"
+                    "v2" -> "bg-cyan-300"
+                    "v3" -> "bg-amber-300"
+                    "v4" -> "bg-emerald-300"
+                    "v5" -> "bg-violet-300"
+                    _ -> "bg-blueGray-300"
                   end
 
                 {region, %{"version" => version, "color" => color}}
@@ -82,5 +81,62 @@ defmodule Havvk.DashboardData do
 
     IO.inspect(result)
     result
+  end
+
+  def get_versions_by_http_parallel() do
+    apps = ["app1", "app2"]
+    envs = ["dev", "qa", "prod"]
+    regions = ["us-east-1", "us-east-2", "eu-west-1"]
+
+    tasks =
+      for app <- apps, env <- envs, region <- regions do
+        Task.async(fn ->
+          version =
+            case Application.get_env(:havvk, :env) do
+              env when env in [:test, :dev] ->
+                HttpClient.get_version_local()
+
+              _ ->
+                ("https://" <> app <> "-" <> env <> "-" <> region <> ".my-org.net")
+                |> HttpClient.get_version_remote()
+            end
+
+          color =
+            case version do
+              "v1" -> "bg-rose-300"
+              "v2" -> "bg-cyan-300"
+              "v3" -> "bg-amber-300"
+              "v4" -> "bg-emerald-300"
+              "v5" -> "bg-violet-300"
+              _ -> "bg-blueGray-300"
+            end
+
+          {app, env, region, version, color}
+        end)
+      end
+
+    results = tasks |> Enum.map(&Task.await/1)
+
+    result_map =
+      Enum.reduce(results, %{}, fn {app, env, region, version, color}, acc ->
+        Map.update(
+          acc,
+          app,
+          %{env => %{region => %{"version" => version, "color" => color}}},
+          fn existing ->
+            Map.update(
+              existing,
+              env,
+              %{region => %{"version" => version, "color" => color}},
+              fn existing_env ->
+                Map.put(existing_env, region, %{"version" => version, "color" => color})
+              end
+            )
+          end
+        )
+      end)
+
+    IO.inspect(result_map)
+    result_map
   end
 end

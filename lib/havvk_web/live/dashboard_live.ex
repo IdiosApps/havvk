@@ -8,12 +8,12 @@ defmodule HavvkWeb.DashboardLive do
     <div>
       <%!-- Need to load in colours once so they render dynamically with the tailwind class? --%>
       <div hidden>
-        <td class="bg-amber-300">hello</td>
-        <td class="bg-purple-300">world</td>
-        <td class="bg-green-200">wow</td>
-        <td class="bg-pink-300">wow</td>
-
-        <td class="bg-teal-300">universe</td>
+        <td class="bg-rose-300">hello</td>
+        <td class="bg-cyan-300">world</td>
+        <td class="bg-amber-300">wow</td>
+        <td class="bg-emerald-300">wow</td>
+        <td class="bg-violet-300">universe</td>
+        <td class="bg-slate-300">2.0</td>
       </div>
       <%!-- <p>Versions: <%= @versions %></p> --%>
       <table>
