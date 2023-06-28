@@ -73,6 +73,8 @@ FROM ${RUNNER_IMAGE}
 
 # Set the environment variable with the build argument value
 ENV SECRET_KEY_BASE=$SECRET_KEY_BASE
+ENV PHX_HOST="localhost"
+
 
 RUN apt-get update -y && apt-get install -y libstdc++6 openssl libncurses5 locales \
   && apt-get clean && rm -f /var/lib/apt/lists/*_*

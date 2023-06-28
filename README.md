@@ -81,3 +81,4 @@ Once the release is running you can connect to it remotely:
 - `docker build --build-arg SECRET_KEY_BASE="your_generated_secret_key" -t havvk .`
 - `docker images`
 - `docker run -p 4000:4000 havvk`
+- `docker exec -it <<img-hash>> /bin/bash` if running `-d` (detached) too
