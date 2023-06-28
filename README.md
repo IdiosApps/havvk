@@ -37,3 +37,22 @@ mix deps.clean -all
 mix deps.get
 mix deps.compile
 ```
+
+## Docker
+
+[`mix phx.gen.release --docker --no-ecto`](https://hexdocs.pm/phoenix/Mix.Tasks.Phx.Gen.Release.html)
+
+Here are some useful release commands you can run in any release environment:
+
+    # To build a release
+    mix release
+
+    # To start your system with the Phoenix server running
+    _build/dev/rel/havvk/bin/server
+
+    # To run migrations
+    _build/dev/rel/havvk/bin/migrate
+
+Once the release is running you can connect to it remotely:
+
+    _build/dev/rel/havvk/bin/havvk remote
