@@ -30,6 +30,26 @@ https://medium.com/flatiron-labs/rolling-your-own-mock-server-for-testing-in-eli
 
 # Dev
 
+## Erlang, Elixir, mix setup (MacOS, Linux)
+- [Install asdf](https://asdf-vm.com/guide/getting-started.html) `brew install asdf`
+- `asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git`
+- `asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git`
+- `asdf install erlang 25.3 && asdf local erlang 25.3`
+- `asdf install elixir 1.15.0-otp-25 && asdf local elixir 1.15.0-otp-25`
+- In case `eixir -v` doesn't report your Elixir & Erlang versions: `echo 'export PATH="$HOME/.asdf/shims:$PATH"' >> ~/.zshrc`
+- `mix local.hex --force`
+- `mix do deps.get, clean, compile`
+
+## Erlang, Elixir, mix setup (Windows)
+
+https://elixir-lang.org/install.html#windows
+
+
+## Running the app
+
+`mix phx.server`
+
+
 ## If it's not working
 
 ```shell
