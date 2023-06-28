@@ -62,15 +62,7 @@ defmodule Havvk.DashboardData do
                       |> HttpClient.get_version_remote()
                   end
 
-                color =
-                  case version do
-                    "v1" -> "bg-rose-300"
-                    "v2" -> "bg-cyan-300"
-                    "v3" -> "bg-amber-300"
-                    "v4" -> "bg-emerald-300"
-                    "v5" -> "bg-violet-300"
-                    _ -> "bg-blueGray-300"
-                  end
+                color = pick_colour(version)
 
                 {region, %{"version" => version, "color" => color}}
               end
@@ -101,15 +93,7 @@ defmodule Havvk.DashboardData do
                 |> HttpClient.get_version_remote()
             end
 
-          color =
-            case version do
-              "v1" -> "bg-rose-300"
-              "v2" -> "bg-cyan-300"
-              "v3" -> "bg-amber-300"
-              "v4" -> "bg-emerald-300"
-              "v5" -> "bg-violet-300"
-              _ -> "bg-blueGray-300"
-            end
+          color = pick_colour(version)
 
           {app, env, region, version, color}
         end)
@@ -138,5 +122,23 @@ defmodule Havvk.DashboardData do
 
     IO.inspect(result_map)
     result_map
+  end
+
+  defp pick_colour(version_string) do
+    colors = [
+      "bg-rose-300",
+      "bg-cyan-300",
+      "bg-amber-300",
+      "bg-emerald-300",
+      "bg-violet-300",
+      "bg-slate-300"
+    ]
+
+    [_v, number_string] = String.split(version_string, "v")
+
+    index = String.to_integer(number_string)
+    index = rem(index, length(colors))
+
+    Enum.at(colors, index)
   end
 end
