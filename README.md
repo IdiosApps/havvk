@@ -76,3 +76,8 @@ Here are some useful release commands you can run in any release environment:
 Once the release is running you can connect to it remotely:
 
     _build/dev/rel/havvk/bin/havvk remote
+
+- `mix phx.gen.secret`
+- `docker build --build-arg SECRET_KEY_BASE="your_generated_secret_key" -t havvk .`
+- `docker images`
+- `docker run -p 4000:4000 havvk`
