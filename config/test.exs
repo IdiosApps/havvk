@@ -7,12 +7,6 @@ config :havvk, HavvkWeb.Endpoint,
   secret_key_base: "Ny3KH34aK5nbEXm9aJvPB/NIVoF1LcNH+pHtP3s4ORZ/2eaPaOa8PAjWGIDj0/kb",
   server: false
 
-# In test we don't send emails.
-config :havvk, Havvk.Mailer, adapter: Swoosh.Adapters.Test
-
-# Disable swoosh api client as it is only required for production adapters.
-config :swoosh, :api_client, false
-
 # Print only warnings and errors during test
 config :logger, level: :warning
 
