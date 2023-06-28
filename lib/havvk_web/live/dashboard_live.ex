@@ -16,38 +16,37 @@ defmodule HavvkWeb.DashboardLive do
         <td class="bg-slate-300">2.0</td>
       </div>
       <%!-- <p>Versions: <%= @versions %></p> --%>
-      <table>
-        <tr>
-          <th>Application</th>
-
-          <th>dev</th>
-
-          <th>qa</th>
-
-          <th>prod</th>
-        </tr>
-
-        <%= for {app, envs} <- @versions do %>
+      <table class="w-full text-center table-auto">
+        <thead class="bg-gray-50">
           <tr>
-            <td><%= app %></td>
-            <%= for {env, regions} <- Map.to_list(envs) |> sortEnvs do %>
-              <td>
-                <%= for {region, details} <- Map.to_list(regions) |> sortRegions do %>
-                  <ul>
-                    <li class={details["color"]}>
-                      <%= details["version"] %>, colour: <%= details["color"] %> Region: <%= region %> env: <%= env %>
-                    </li>
-                  </ul>
-                <% end %>
-              </td>
-            <% end %>
+            <th class="px-4 py-2">Application</th>
+            <th class="px-4 py-2">dev</th>
+            <th class="px-4 py-2">qa</th>
+            <th class="px-4 py-2">prod</th>
           </tr>
-        <% end %>
+        </thead>
+        <tbody>
+          <%= for {app, envs} <- @versions do %>
+            <tr>
+              <td class="border px-4 py-2"><%= app %></td>
+              <%= for {_env, regions} <- Map.to_list(envs) |> sortEnvs do %>
+                <td class="border px-4 py-2">
+                  <%= for {_region, details} <- Map.to_list(regions) |> sortRegions do %>
+                      <p class={"px-4 py-2 " <> details["color"]}>
+                        <%= details["version"] %>
+                      </p>
+                  <% end %>
+                </td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
     """
   end
 
+  @spec sortEnvs(any) :: list
   def sortEnvs(list) do
     order = ["dev", "qa", "prod"]
     Enum.sort_by(list, fn {env, _} -> Enum.find_index(order, &(&1 == env)) end)
@@ -64,10 +63,6 @@ defmodule HavvkWeb.DashboardLive do
         socket,
         versions: DashboardData.get_versions_by_http()
       )
-
-    IO.inspect(socket)
-    IO.puts("checking socket assigns, added versions")
-
     {:ok, socket}
   end
 end
