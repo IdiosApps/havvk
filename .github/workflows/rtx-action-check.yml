@@ -1,0 +1,17 @@
+name: rtx-action-check
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: jdxcode/rtx-action@v1
+      - run: rtx --version
+      - run: rtx exec -- elixir --version
+      - run: elixir --version
+      - run: which elixir
+      - run: which erl
