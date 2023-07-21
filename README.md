@@ -37,7 +37,6 @@ We use [rtx](https://github.com/jdxcode/rtx) to keep our tooling on the compatib
 - [Install rtx](https://github.com/jdxcode/rtx#installation). I recommend this approach:
   - `curl https://rtx.pub/install.sh | sh`
 - `rtx install` will install versions in [.rtx.toml](.rtx.toml)
- <!-- - `rtx use erlang@25 && rtx use rtx use elixir@1.15.0-otp-25` -->
 For now, sticking to Erlang/OTP 25 gives the best IDE experience; VS code uses a plugin with https://github.com/elixir-lsp/elixir-ls, and that's best on OTP 25 for now.
 
 The versions already in [.rtx.toml](.rtx.toml) were added with:
